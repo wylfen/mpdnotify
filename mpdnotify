@@ -16,7 +16,7 @@
 #Configuration-------------------------------------------------------
 
 #The music directory that contains the music and cover files
-MUSIC_DIR="/media/Daten/MP3/My_Music"
+MUSIC_DIR="/your/music/dir/goes/here"
 
 #The default cover to use (optional, leave empty for no default cover)
 DEFAULT_ART=""
