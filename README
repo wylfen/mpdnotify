@@ -1,0 +1,42 @@
+mpdnotify - 'Now Playing' information via notify-send
+-----------------------------------------------------
+
+[1] - Synopsis
+'mpdnotify' is a simple bash script that uses notify-send
+and mpc to create notifications about what song is currently
+playing in mpd.
+
+[2] - Requirements
+ - mpd
+ - mpc
+ - notify-send (libnotify)
+ - standard UNIX tools (find, egrep, head)
+
+[3] - Download
+
+Fetch the script with git
+ - git clone git://github.com/KindOfAutomatic/mpdnotify.git
+
+Or use wget
+ - wget https://github.com/KindOfAutomatic/mpdnotify/raw/master/mpdnotify
+
+[4] - Usage
+Configure the script by editing the 'mpdnotify' file.
+
+The only thing left to do is to set up a program that will run
+the script whenever a new song is playing.
+I use the 'execute_on_song_change' option in 'ncmpcpp' in order to do that.
+
+You could - for example - also employ a simple lua script in case you are
+using awesome wm (awesome.naquadah.org).
+
+In order to display cover art, you need to tell 'mpdnotify' where your music
+directory is. The script will then look for image files in the directory that
+contains the currently playing track.
+
+The default regex expressions for cover art identification will match:
+(front|cover|art).(jpg|jpeg|png) [case insensitive]
+
+[5] - License
+You can use, edit and redistribute this script in any way you like.
+(Just make sure not to hurt any kittens)
