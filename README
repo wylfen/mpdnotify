@@ -11,6 +11,7 @@ playing in mpd.
  - mpc
  - notify-send (libnotify)
  - standard UNIX tools (find, egrep, head)
+ - ImageMagick (convert)
 
 [3] - Download
 
@@ -36,6 +37,9 @@ contains the currently playing track.
 
 The default regex expressions for cover art identification will match:
 (front|cover|art).(jpg|jpeg|png) [case insensitive]
+
+Before being passed to notify-send, every cover is resized with ImageMagick
+according to the geometry given in the corresponding setting.
 
 [5] - License
 You can use, edit and redistribute this script in any way you like.

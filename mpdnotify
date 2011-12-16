@@ -8,6 +8,7 @@
 # - mpd
 # - mpc
 # - notify-send (libnotify)
+# - ImageMagick (convert)
 
 # Author : Wolfgang Mueller
 # You can use, edit and redistribute this script in any way you like.
@@ -40,6 +41,12 @@ NAME_REG="(front|cover|art)"
 #Title of the notification
 NOTIFY_TITLE="Now Playing"
 
+#Path of temporary resized cover
+TEMP_PATH="/tmp/mpdnotify_cover"
+
+#Resize cover to
+COVER_RESIZE="125x125"
+
 #--------------------------------------------------------------------
 
 #determine file
@@ -58,11 +65,15 @@ song="$(mpc current -f "$T_FORMAT")"
 art="$MUSIC_DIR/${file%/*}"
 
 #find every file that is either png or jpg
-images="$(find "$art/"* -type f | egrep -i "$IMG_REG")"
+images="$(find "$art/"* -maxdepth 0 -type f | egrep -i "$IMG_REG")"
 
 artfiles="$(egrep -i "$NAME_REG" <<< "$images")" 
 cover="$(head -n1 <<< "$artfiles")"
 [[ -z $cover ]] && [[ -n $DEFAULT_ART ]] && cover="$DEFAULT_ART"
+
+#resize cover
+convert "$cover" -resize "$COVER_RESIZE" "$TEMP_PATH"
+cover="$TEMP_PATH"
 
 #check if art is available
 # --hint=int:transient:1 is needed, because gnome-shell will keep the notification in its bar.
