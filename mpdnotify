@@ -71,14 +71,14 @@ artfiles="$(egrep -i "$NAME_REG" <<< "$images")"
 cover="$(head -n1 <<< "$artfiles")"
 [[ -z $cover ]] && [[ -n $DEFAULT_ART ]] && cover="$DEFAULT_ART"
 
-#resize cover
-convert "$cover" -resize "$COVER_RESIZE" "$TEMP_PATH"
-cover="$TEMP_PATH"
-
 #check if art is available
 # --hint=int:transient:1 is needed, because gnome-shell will keep the notification in its bar.
 # using 'hint' they'll be removed automatically (gnome-shell 3.01)
 if [[ -n $cover ]]; then
+	#resize cover
+	convert "$cover" -resize "$COVER_RESIZE" "$TEMP_PATH"
+	cover="$TEMP_PATH"
+
 	notify-send -t 5000 --hint=int:transient:1 "$NOTIFY_TITLE" "$title\n$song" -i "$cover"
 else
 	notify-send -t 5000 --hint=int:transient:1 "$NOTIFY_TITLE" "$title\n$song"
