@@ -4,11 +4,11 @@
 #on mpd. This script uses notify-send and
 #mpc to get the current song information.
 
-#Requirements : 
+#Requirements (* = optional)
 # - mpd
 # - mpc
 # - notify-send (libnotify)
-# - ImageMagick (convert)
+# * ImageMagick (convert)
 
 # Author : Wolfgang Mueller
 # You can use, edit and redistribute this script in any way you like.
@@ -44,8 +44,11 @@ NOTIFY_TITLE="Now Playing"
 #Path of temporary resized cover
 TEMP_PATH="/tmp/mpdnotify_cover"
 
-#Resize cover to
+#Resize cover to (empty for no convert)
 COVER_RESIZE="125x125"
+
+#Logfile
+LOGFILE="$HOME/.mpdnotify.log"
 
 #--------------------------------------------------------------------
 
@@ -64,7 +67,7 @@ song="$(mpc current -f "$T_FORMAT")"
 #Art directory
 art="$MUSIC_DIR/${file%/*}"
 
-#find every file that is either png or jpg
+#find every file that matches IMG_REG
 images="$(find "$art/"* -maxdepth 0 -type f | egrep -i "$IMG_REG")"
 
 artfiles="$(egrep -i "$NAME_REG" <<< "$images")" 
@@ -75,12 +78,15 @@ cover="$(head -n1 <<< "$artfiles")"
 # --hint=int:transient:1 is needed, because gnome-shell will keep the notification in its bar.
 # using 'hint' they'll be removed automatically (gnome-shell 3.01)
 if [[ -n $cover ]]; then
-	#resize cover
-	convert "$cover" -resize "$COVER_RESIZE" "$TEMP_PATH"
-	cover="$TEMP_PATH"
 
-	notify-send -t 5000 --hint=int:transient:1 "$NOTIFY_TITLE" "$title\n$song" -i "$cover"
+	if [[ -n $COVER_RESIZE ]]; then
+	#resize cover
+		convert "$cover" -resize "$COVER_RESIZE" "$TEMP_PATH" >> "$LOGFILE" 2>&1
+		cover="$TEMP_PATH"
+	fi
+
+	notify-send -t 5000 --hint=int:transient:1 "$NOTIFY_TITLE" "$title\n$song" -i "$cover" >> "$LOGFILE" 2>&1
 else
-	notify-send -t 5000 --hint=int:transient:1 "$NOTIFY_TITLE" "$title\n$song"
+	notify-send -t 5000 --hint=int:transient:1 "$NOTIFY_TITLE" "$title\n$song" >> "$LOGFILE" 2>&1
 fi
 

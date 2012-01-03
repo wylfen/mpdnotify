@@ -6,12 +6,12 @@ mpdnotify - 'Now Playing' information via notify-send
 and mpc to create notifications about what song is currently
 playing in mpd.
 
-[2] - Requirements
+[2] - Requirements (* = optional)
  - mpd
  - mpc
  - notify-send (libnotify)
  - standard UNIX tools (find, egrep, head)
- - ImageMagick (convert)
+ * ImageMagick (convert)
 
 [3] - Download
 
