@@ -41,6 +41,18 @@ The default regex expressions for cover art identification will match:
 Before being passed to notify-send, every cover is resized with ImageMagick
 according to the geometry given in the corresponding setting.
 
-[5] - License
+[5] - Logfile
+To prevent mpdnotify from spamming output to the invoking program, any
+output from both convert and notify-send is sent to "$HOME/.mpdnotify.log"
+by default (this can be changed in the configuration section of the
+script).
+
+[6] - Screenshot
+See 'mpdnotify.png' for a screenshot. Because notify-send will look
+different depending on the window manager (etc.), this screenshot is
+only an example and shows mpdnotify using awesome wm with the zenburn
+theme.
+
+[7] - License
 You can use, edit and redistribute this script in any way you like.
 (Just make sure not to hurt any kittens)
