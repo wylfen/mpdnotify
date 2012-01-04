@@ -33,7 +33,7 @@ A_FORMAT="%artist%[ (%album%)]"
 T_FORMAT="%title%"
 
 #Regex expression used for image search
-IMG_REG="\.(jpg|jpeg|png)"
+IMG_REG="\.(jpg|jpeg|png|gif)"
 
 #Regex expression used for image name
 NAME_REG="(front|cover|art)"
