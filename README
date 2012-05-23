@@ -42,10 +42,10 @@ Before being passed to notify-send, every cover is resized with ImageMagick
 according to the geometry given in the corresponding setting.
 
 [5] - Logfile
-To prevent mpdnotify from spamming output to the invoking program, any
-output from both convert and notify-send is sent to "$HOME/.mpdnotify.log"
-by default (this can be changed in the configuration section of the
-script).
+To prevent mpdnotify from spamming output to the invoking program, any output
+(STDOUT and STDERR) from both convert and notify-send is sent to
+"$HOME/.mpdnotify.log" by default (this can be changed in the configuration
+section of the script).
 
 [6] - Screenshot
 See 'mpdnotify.png' for a screenshot. Because notify-send will look

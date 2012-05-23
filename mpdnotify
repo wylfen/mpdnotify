@@ -1,10 +1,9 @@
 #!/bin/bash
 
-#A simple notify script for now-playing songs
-#on mpd. This script uses notify-send and
-#mpc to get the current song information.
+# A simple notify script for now-playing songs on mpd. This script uses
+# notify-send and mpc to get the current song information.
 
-#Requirements (* = optional)
+# Requirements (* = optional)
 # - mpd
 # - mpc
 # - notify-send (libnotify)
@@ -14,73 +13,72 @@
 # You can use, edit and redistribute this script in any way you like.
 # (Just make sure not to hurt any kittens)
 
-#Configuration-------------------------------------------------------
+# Configuration-------------------------------------------------------
 
-#The music directory that contains the music and cover files
+# The music directory that contains the music and cover files
 MUSIC_DIR="/your/music/dir/goes/here"
 
-#The default cover to use (optional, leave empty for no default cover)
+# The default cover to use (optional)
 DEFAULT_ART=""
 
-#The following track metadata delimiters can be changed.
-#You can find all possible delimiters in the 'mpc' manpage.
-#It's also possible to use tags like <u></u> and <i></i>
+# The following track metadata delimiters can be changed.
+# You can find all possible delimiters in the 'mpc' manpage.
+# It's also possible to use pango markup like <u></u> and <i></i>
 
-#How to format artist/album information
+# How to format artist/album information
 A_FORMAT="%artist%[ (%album%)]"
 
-#How to format title information
+# How to format title information
 T_FORMAT="%title%"
 
-#Regex expression used for image search
+# Regex expression used for image search
 IMG_REG="\.(jpg|jpeg|png|gif)"
 
-#Regex expression used for image name
+# Regex expression used for image name
 NAME_REG="(front|cover|art)"
 
-#Title of the notification
+# Title of the notification
 NOTIFY_TITLE="Now Playing"
 
-#Path of temporary resized cover
+# Path of temporary resized cover
 TEMP_PATH="/tmp/mpdnotify_cover"
 
-#Resize cover to (empty for no convert)
+# Resize cover to (optional)
 COVER_RESIZE="125x125"
 
-#Logfile
+# Logfile
 LOGFILE="$HOME/.mpdnotify.log"
 
 #--------------------------------------------------------------------
 
-#determine file
+# determine file
 file="$(mpc current -f %file%)"
 
-#check if anything is playing at all
+# check if anything is playing at all
 [[ -z $file ]] && exit 1
 
-#Get title info
+# Get title info
 title="$(mpc current -f "$A_FORMAT")"
 
-#Get song info
+# Get song info
 song="$(mpc current -f "$T_FORMAT")"
 
-#Art directory
+# Art directory
 art="$MUSIC_DIR/${file%/*}"
 
-#find every file that matches IMG_REG
-images="$(find "$art/"* -maxdepth 0 -type f | egrep -i "$IMG_REG")"
+# find every file that matches both IMG_REG and NAME_REG and set the first matching
+# file to be the cover.
+cover="$(find "$art/" -maxdepth 1 -type f | egrep -i "$IMG_REG" | egrep -i -m1 "$NAME_REG")"
 
-artfiles="$(egrep -i "$NAME_REG" <<< "$images")" 
-cover="$(head -n1 <<< "$artfiles")"
-[[ -z $cover ]] && [[ -n $DEFAULT_ART ]] && cover="$DEFAULT_ART"
+# when no cover is found, use DEFAULT_ART as cover
+cover="${cover:=$DEFAULT_ART}"
 
-#check if art is available
+# check if art is available
 # --hint=int:transient:1 is needed, because gnome-shell will keep the notification in its bar.
 # using 'hint' they'll be removed automatically (gnome-shell 3.01)
 if [[ -n $cover ]]; then
 
 	if [[ -n $COVER_RESIZE ]]; then
-	#resize cover
 		convert "$cover" -resize "$COVER_RESIZE" "$TEMP_PATH" >> "$LOGFILE" 2>&1
 		cover="$TEMP_PATH"
 	fi
