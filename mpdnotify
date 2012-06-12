@@ -16,7 +16,7 @@
 # Configuration-------------------------------------------------------
 
 # The music directory that contains the music and cover files
-MUSIC_DIR="/your/music/dir/goes/here"
+MUSIC_DIR="$HOME/music"
 
 # The default cover to use (optional)
 DEFAULT_ART=""
@@ -41,10 +41,13 @@ NAME_REG="(front|cover|art)"
 NOTIFY_TITLE="Now Playing"
 
 # Path of temporary resized cover
-TEMP_PATH="/tmp/mpdnotify_cover"
+TEMP_PATH="/tmp/mpdnotify_cover.png"
 
-# Resize cover to (optional)
+# Resize cover to (optional, recommended)
 COVER_RESIZE="125x125"
+
+# Thumbnail background (transparent by default)
+COVER_BACKGROUND="none"
 
 # Logfile
 LOGFILE="$HOME/.mpdnotify.log"
@@ -79,7 +82,8 @@ cover="${cover:=$DEFAULT_ART}"
 if [[ -n $cover ]]; then
 
 	if [[ -n $COVER_RESIZE ]]; then
-		convert "$cover" -resize "$COVER_RESIZE" "$TEMP_PATH" >> "$LOGFILE" 2>&1
+		convert "$cover" -thumbnail $COVER_RESIZE -gravity center \
+			-background "$COVER_BACKGROUND" -extent $COVER_RESIZE "$TEMP_PATH" >> "$LOGFILE" 2>&1
 		cover="$TEMP_PATH"
 	fi
 
