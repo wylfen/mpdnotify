@@ -16,10 +16,10 @@ playing in mpd.
 [3] - Download
 
 Fetch the script with git
- - git clone git://github.com/KindOfAutomatic/mpdnotify.git
+ - git clone git://github.com/vehk/mpdnotify.git
 
 Or use wget
- - wget https://github.com/KindOfAutomatic/mpdnotify/raw/master/mpdnotify
+ - wget https://github.com/vehk/mpdnotify/raw/master/mpdnotify
 
 [4] - Usage
 Configure the script by editing the 'mpdnotify' file.
