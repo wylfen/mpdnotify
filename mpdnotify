@@ -32,10 +32,7 @@ A_FORMAT="%artist%[ (%album%)]"
 T_FORMAT="%title%"
 
 # Regex expression used for image search
-IMG_REG="\.(jpg|jpeg|png|gif)"
-
-# Regex expression used for image name
-NAME_REG="(front|cover|art)"
+IMG_REG="(front|cover|art)\.(jpg|jpeg|png|gif)$"
 
 # Title of the notification
 NOTIFY_TITLE="Now Playing"
@@ -69,9 +66,9 @@ song="$(mpc current -f "$T_FORMAT")"
 # Art directory
 art="$MUSIC_DIR/${file%/*}"
 
-# find every file that matches both IMG_REG and NAME_REG and set the first matching
-# file to be the cover.
-cover="$(find "$art/" -maxdepth 1 -type f | egrep -i "$IMG_REG" | egrep -i -m1 "$NAME_REG")"
+# find every file that matches IMG_REG set the first matching file to be the
+# cover.
+cover="$(find "$art/" -maxdepth 1 -type f | egrep -i -m1 "$IMG_REG")"
 
 # when no cover is found, use DEFAULT_ART as cover
 cover="${cover:=$DEFAULT_ART}"

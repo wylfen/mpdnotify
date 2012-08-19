@@ -36,7 +36,7 @@ directory is. The script will then look for image files in the directory that
 contains the currently playing track.
 
 The default regex expressions for cover art identification will match:
-(front|cover|art).(jpg|jpeg|png) [case insensitive]
+(front|cover|art)\.(jpg|jpeg|png)$ [case insensitive]
 
 Before being passed to notify-send, every cover is resized with ImageMagick
 according to the geometry given in the corresponding setting.
