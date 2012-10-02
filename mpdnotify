@@ -26,7 +26,7 @@ DEFAULT_ART=""
 # It's also possible to use pango markup like <u></u> and <i></i>
 
 # How to format artist/album information
-A_FORMAT="%artist%[ (%album%)]"
+A_FORMAT="%artist%[ (%album%)] - %date%"
 
 # How to format title information
 T_FORMAT="%title%"

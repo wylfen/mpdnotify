@@ -41,6 +41,11 @@ The default regex expressions for cover art identification will match:
 Before being passed to notify-send, every cover is resized with ImageMagick
 according to the geometry given in the corresponding setting.
 
+As mpd honors the MPD_{HOST,PORT} environment variables, you can access remote
+MPD instances: MPD_HOST=192.168.0.200 mpdnotify
+Note, however, that mpdnotify cannote locate album covers this way unless you
+have a local copy of them in the same folder.
+
 [5] - Logfile
 To prevent mpdnotify from spamming output to the invoking program, any output
 (STDOUT and STDERR) from both convert and notify-send is sent to
