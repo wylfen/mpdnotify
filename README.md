@@ -1,27 +1,24 @@
 mpdnotify
 =========
 
-## Synopsis
+### Synopsis
 mpdnotify is a simple bash script that uses notify-send
 and mpc to create notifications about what song is currently
 playing in mpd.
 
-## Requirements
+### Requirements
  * mpd
  * mpc
  * notify-send (libnotify)
  * standard UNIX tools (find, egrep, head)
  * ImageMagick (convert) [optional]
 
-## Download
+### Download
 
-Fetch the script with git
+Just fetch this repo with git:
 `git clone git://github.com/vehk/mpdnotify.git`
 
-Or use wget
-`wget https://github.com/vehk/mpdnotify/raw/master/mpdnotify`
-
-## Usage
+### Usage
 Configure the script by editing the 'mpdnotify' file.
 
 The only thing left to do is to set up a program that will run
@@ -33,7 +30,7 @@ directory is. The script will then look for image files in the directory that
 contains the currently playing track.
 
 The default regex expressions for cover art identification will match:
-`(front|cover|art)\.(jpg|jpeg|png)$` [case insensitive]
+`(front|cover|art)\.(jpg|jpeg|png)$`
 
 Before being passed to notify-send, every cover is resized with ImageMagick
 according to the geometry given in the corresponding setting.
@@ -45,29 +42,29 @@ Note, however, that mpdnotify cannote locate album covers this way unless you
 have a local copy of them in a folder equal in structure as the music folder on
 the remote instance.
 
-## Usage with mpdcron
+### Usage with mpdcron
 As a nice alternative to a client bound hook there is
 [mpdcron](http://alip.github.com/mpdcron/).
 
 Install it on your system, configure mpdcron.conf to listen for player changes
-and add to `~/.mpdcron/hooks/player`:
+and add to ~/.mpdcron/hooks/player
 `[[ "$MPD_STATUS_STATE" = play ]] && mpdnotify`
 
 Remember to `chmod +x ~/.mpdcron/hooks/player`.
 
-## Logfile
+### Logfile
 To prevent mpdnotify from spamming output to the invoking program, any output
-(`STDOUT` and `STDERR`) from both `convert` and `notify-send` is sent to
+(STDOUT and STDERR) from both `convert` and `notify-send` is sent to
 `$HOME/.mpdnotify.log` by default (this can be changed in the configuration
 section of the script).
 
-## Screenshot
+### Screenshot
 ![mpdnotify in awesome](mpdnotify.png "mpdnotify")
-See `mpdnotify.png` for a screenshot. Because notify-send will look
-different depending on the window manager (etc.), this screenshot is
-only an example and shows mpdnotify using awesome wm with the zenburn
-theme.
 
-## License
+Because notify-send will look different depending on the window manager (etc.),
+this screenshot is only an example and shows mpdnotify using awesome wm with
+the zenburn theme.
+
+### License
 You can use, edit and redistribute this script in any way you like.
 (Just make sure not to hurt any kittens)
