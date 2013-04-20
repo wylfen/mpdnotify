@@ -12,8 +12,16 @@
 # Author : Wolfgang Mueller
 # You can use, edit and redistribute this script in any way you like.
 # (Just make sure not to hurt any kittens)
+# https://github.com/graysky2/mpdnotify
 
 # Configuration-------------------------------------------------------
+
+# Note that mpc may require you to set the MPD_HOST variable in order 
+# to function correctly with this script. Uncomment the MPD_HOST variable
+# and set it manually if this is the case on your system.
+#
+# The IP address of the MPD server
+#MPD_HOST=192.168.0.1
 
 # The music directory that contains the music and cover files
 MUSIC_DIR="$HOME/music"
