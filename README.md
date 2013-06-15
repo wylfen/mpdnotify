@@ -20,8 +20,8 @@ Just fetch this repo with git:
 
 ### Usage
 This script now uses a config file located in
-`$XDG_CONFIG_HOME/mpdnofity.conf`. A config template comes with the script;
-Copy it over to `$XDG_CONFIG_HOME` and edit it to your liking.
+`$XDG_CONFIG_HOME/mpdnotify.conf`. A config template comes with the script;
+copy it over to `$XDG_CONFIG_HOME` and edit it to your liking.
 
 The only thing left to do is to set up a program that will run
 the script whenever a new song is playing.
