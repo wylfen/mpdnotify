@@ -19,8 +19,9 @@ Just fetch this repo with git:
 `git clone git://github.com/vehk/mpdnotify.git`
 
 ### Usage
-$XDG_CONFIG_HOME/mpdnotify.conf is created the first time the script is executed.
-Edit it to match your system setup.
+This script now uses a config file located in
+`$XDG_CONFIG_HOME/mpdnofity.conf`. A config template comes with the script;
+Copy it over to `$XDG_CONFIG_HOME` and edit it to your liking.
 
 The only thing left to do is to set up a program that will run
 the script whenever a new song is playing.
