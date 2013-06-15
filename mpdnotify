@@ -14,9 +14,21 @@
 # (Just make sure not to hurt any kittens)
 # https://github.com/graysky2/mpdnotify
 
-# Configuration-------------------------------------------------------
+# make sure env var is setup correctly
+[[ -z "$XDG_CONFIG_HOME" ]] && \
+		XDG_CONFIG_HOME="$HOME/.config"
 
-# Note that mpc may require you to set the MPD_HOST variable in order 
+CFG_FILE=$XDG_CONFIG_HOME/mpdnotify.conf
+
+if [[ ! -f "$CFG_FILE" ]]; then
+		echo '------------------------------------------------------------'
+		echo ' No config file found so creating a fresh one.'
+		echo
+		cat <<EOF > $XDG_CONFIG_HOME/mpdnotify.conf
+#
+# $XDG_CONFIG_HOME/mpdnotify.conf
+#
+# Note that mpc may require you to set the MPD_HOST variable in order
 # to function correctly with this script. Uncomment the MPD_HOST variable
 # and set it manually if this is the case on your system.
 #
@@ -56,6 +68,13 @@ COVER_BACKGROUND="none"
 
 # Logfile
 LOGFILE="$HOME/.mpdnotify.log"
+EOF
+		echo ' Edit $XDG_CONFIG_HOME/mpdnotify.conf for this system.'
+		echo '------------------------------------------------------------'
+		exit 1
+else
+		. "$CFG_FILE"
+fi
 
 #--------------------------------------------------------------------
 
@@ -102,4 +121,3 @@ if [[ -n $cover ]]; then
 else
     notify-send -t 5000 --hint=int:transient:1 "$NOTIFY_TITLE" "$text" >> "$LOGFILE" 2>&1
 fi
-
