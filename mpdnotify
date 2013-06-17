@@ -18,16 +18,16 @@
 
 # make sure env var is setup correctly
 [[ -z "$XDG_CONFIG_HOME" ]] && \
-		XDG_CONFIG_HOME="$HOME/.config"
+    XDG_CONFIG_HOME="$HOME/.config"
 
 CFG_FILE="$XDG_CONFIG_HOME/mpdnotify.conf"
 
 if [[ ! -f "$CFG_FILE" ]]; then
-		echo " No config file found."
-		echo " Create $XDG_CONFIG_HOME/mpdnotify.conf for this user."
-		exit 1
+    echo " No config file found."
+    echo " Create $XDG_CONFIG_HOME/mpdnotify.conf for this user."
+    exit 1
 else
-		. "$CFG_FILE"
+    . "$CFG_FILE"
 fi
 
 #--------------------------------------------------------------------
