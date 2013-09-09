@@ -71,7 +71,7 @@ if [[ -n $cover ]]; then
         cover="$TEMP_PATH"
     fi
 
-    notify-send -t 5000 --hint=int:transient:1 "$NOTIFY_TITLE" "$text" -i "$cover" >> "$LOGFILE" 2>&1
+    notify-send -u $URGENCY -t 5000 --hint=int:transient:1 "$NOTIFY_TITLE" "$text" -i "$cover" >> "$LOGFILE" 2>&1
 else
-    notify-send -t 5000 --hint=int:transient:1 "$NOTIFY_TITLE" "$text" >> "$LOGFILE" 2>&1
+    notify-send -u $URGENCY -t 5000 --hint=int:transient:1 "$NOTIFY_TITLE" "$text" >> "$LOGFILE" 2>&1
 fi
