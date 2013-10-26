@@ -12,6 +12,7 @@ playing in mpd.
  * notify-send (libnotify)
  * standard UNIX tools (find, egrep, head)
  * ImageMagick (convert) [optional]
+ * [eyeD3](http://eyed3.nicfit.net/) [optional]
 
 ### Download
 
@@ -33,6 +34,9 @@ contains the currently playing track.
 
 The default regex expressions for cover art identification will match:
 `(front|cover|art)\.(jpg|jpeg|png)$`
+
+Additionally, mpdnotify can use eyeD3 to retrieve embedded album art. Album art
+found in the music directory is preferred in this case.
 
 Before being passed to notify-send, every cover is resized with ImageMagick
 according to the geometry given in the corresponding setting.
