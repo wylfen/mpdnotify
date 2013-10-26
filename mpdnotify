@@ -55,6 +55,18 @@ art="$MUSIC_DIR/${file%/*}"
 # cover.
 cover="$(find "$art/" -maxdepth 1 -type f | egrep -i -m1 "$IMG_REG")"
 
+# when no cover is found in the art directory, try
+# to retrieve embedded art from mp3s
+if [[ -z $cover ]]; then
+    mkdir -p "$TEMP_APIC"
+
+    # remove old covers
+    rm "$TEMP_APIC"/*.jpeg
+
+    eyeD3 --write-images="$TEMP_APIC" "$MUSIC_DIR/$file" &>/dev/null
+    cover="$(find "$TEMP_APIC" -maxdepth 1 -type f -iname "*.jpeg")"
+fi
+
 # when no cover is found, use DEFAULT_ART as cover
 cover="${cover:=$DEFAULT_ART}"
 
