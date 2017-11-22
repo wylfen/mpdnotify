@@ -51,12 +51,12 @@ song="$(mpc current -f "$T_FORMAT")"
 # Art directory
 art="$MUSIC_DIR/${file%/*}"
 
-# bail if the art directory does not exist (mpd is playing a stream, etc)
-[[ ! -d $art ]] && exit 1
-
-# find every file that matches IMG_REG set the first matching file to be the
-# cover.
-cover="$(find "$art/" -maxdepth 1 -type f | egrep -i -m1 "$IMG_REG")"
+# skip if the art directory does not exist (mpd is playing a stream, etc)
+if [[ -d $art ]]; then
+    # find every file that matches IMG_REG set the first matching file to be the
+    # cover.
+    cover="$(find "$art/" -maxdepth 1 -type f | egrep -i -m1 "$IMG_REG")"
+fi
 
 # when no cover is found, use DEFAULT_ART as cover
 cover="${cover:=$DEFAULT_ART}"
